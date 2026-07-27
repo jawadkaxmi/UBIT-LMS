@@ -24,7 +24,13 @@ function Login() {
       // Dashboard par bhej do
       navigate('/dashboard')
     } catch (err) {
-      setError('Galat username ya password. Dobara koshish karein.')
+      if (err.response) {
+        // Server ne jawab diya (401 = galat username/password)
+        setError('Invalid username or password. Please try again.')
+      } else {
+        // Request server tak pahunchi hi nahi — server band hai, ya CORS block
+        setError('Could not reach the server. Please make sure it is running and try again.')
+      }
     } finally {
       setLoading(false)
     }
@@ -45,7 +51,7 @@ function Login() {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Apna username"
+          placeholder="Your username"
           required
         />
 
@@ -56,7 +62,7 @@ function Login() {
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Apna password"
+            placeholder="Your password"
             required
           />
           <button

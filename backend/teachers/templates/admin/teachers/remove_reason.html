@@ -1,0 +1,28 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>Remove teacher(s) — reason</h1>
+
+<p>You are removing the following teacher(s) (soft delete). The record will not
+   be deleted — it will only be marked <b>inactive</b> so the name stays safe in
+   past classes:</p>
+
+<ul>
+  {% for t in teachers %}
+    <li><b>{{ t.name }}</b>{% if t.designation %} — {{ t.designation }}{% endif %}</li>
+  {% endfor %}
+</ul>
+
+<form action="" method="post">{% csrf_token %}
+  {# Kaunse teacher select hue the — hidden mein bhejo #}
+  {% for t in teachers %}
+    <input type="hidden" name="{{ action_checkbox_name }}" value="{{ t.pk }}">
+  {% endfor %}
+  <input type="hidden" name="action" value="remove_teachers">
+
+  {{ form.as_p }}
+
+  <button type="submit" name="apply" value="1" class="default">Remove teacher(s)</button>
+  <a href="{% url 'admin:teachers_teacher_changelist' %}" class="button cancel-link">Cancel</a>
+</form>
+{% endblock %}

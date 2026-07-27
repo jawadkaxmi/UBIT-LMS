@@ -21,4 +21,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Saare accounts API routes (/api/token/, /api/token/refresh/, /api/me/)
     path('api/', include('accounts.urls')),
+    # Classes API routes (/api/classes/)
+    path('api/', include('classes.urls')),
+    # Teachers API routes (/api/teachers/)
+    path('api/', include('teachers.urls')),
+    # Attendance API routes (/api/attendance/records/...)
+    path('api/attendance/', include('attendance.urls')),
+    # DRF browsable API ke login/logout (browser mein API test karne ke liye)
+    path('api-auth/', include('rest_framework.urls')),
 ]

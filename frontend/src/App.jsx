@@ -1,6 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login'
-import Dashboard from './pages/Dashboard'
+import Layout from './components/Layout'
+import DashboardHome from './pages/DashboardHome'
+import Teachers from './pages/Teachers'
+import Classes from './pages/Classes'
+import Attendance from './pages/Attendance'
 
 function App() {
   // Agar token hai to user "logged in" hai
@@ -8,13 +12,18 @@ function App() {
 
   return (
     <Routes>
-      {/* Login page */}
+      {/* Login page (bina sidebar) */}
       <Route path="/login" element={<Login />} />
 
-      {/* Dashboard — login ke baad */}
-      <Route path="/dashboard" element={<Dashboard />} />
+      {/* Baaki saare pages — Layout (sidebar) ke andar */}
+      <Route element={<Layout />}>
+        <Route path="/dashboard" element={<DashboardHome />} />
+        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/classes" element={<Classes />} />
+        <Route path="/attendance" element={<Attendance />} />
+      </Route>
 
-      {/* Baaki koi bhi URL: logged in ho to dashboard, warna login bhejo */}
+      {/* Koi bhi aur URL: logged in ho to dashboard, warna login */}
       <Route
         path="*"
         element={<Navigate to={isLoggedIn ? '/dashboard' : '/login'} />}

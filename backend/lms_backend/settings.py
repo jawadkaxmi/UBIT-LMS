@@ -44,6 +44,9 @@ INSTALLED_APPS = [
 
     # Hamari apni apps
     'accounts',              # users, roles (Admin/Student/Visitor), login
+    'classes',               # classes announce karna (Phase 2)
+    'teachers',              # teachers ki list (add/edit/soft-delete)
+    'attendance',            # join/leave logs + attendance sheet (Phase 3)
 ]
 
 MIDDLEWARE = [
@@ -139,6 +142,9 @@ REST_FRAMEWORK = {
     # Har API request JWT token se authenticate hogi (login ke baad)
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # SessionAuthentication — taaki browser mein DRF ki browsable API
+        # se bhi login karke test kar sakein (dev/testing ke liye).
+        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 

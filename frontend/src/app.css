@@ -269,7 +269,364 @@ a {
 }
 
 
-/* ===== 7. RESPONSIVE (mobile / tablet) ===== */
+/* ===== 7. SIDEBAR NAV — active / disabled states ===== */
+/* Jis page par ho, us nav item ko highlight karo */
+.nav-item-active {
+  background: rgba(164, 53, 240, 0.18);
+  color: var(--white);
+  border-left: 3px solid var(--purple);
+}
+/* "Coming soon" (abhi na bane) items — halke aur click nahi hote */
+.nav-item-disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.nav-item-disabled:hover {
+  background: none;
+  color: #D1D7DC;
+}
+
+
+/* ===== 8. BUTTONS (small / inline / danger / cancel) ===== */
+/* Chhota button (cards par Edit/Remove/Reactivate) */
+.btn-small {
+  padding: 7px 14px;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--black);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn-small:hover {
+  background: var(--gray-light);
+}
+/* Danger (remove) — laal */
+.btn-danger {
+  color: var(--red);
+  border-color: #F5C2CE;
+}
+.btn-danger:hover {
+  background: #FDECEF;
+}
+/* Inline primary button (full-width nahi) */
+.btn-inline {
+  width: auto;
+  margin: 0;
+  padding: 10px 20px;
+}
+/* Cancel/Close button (modal mein) — text gehra rakha hai taaki
+   "disabled" na lage, clickable lage */
+.btn-cancel {
+  padding: 10px 20px;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--black);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-cancel:hover {
+  background: var(--gray-light);
+}
+
+
+/* ===== 9. TABS (Active / Inactive) ===== */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--gray-border);
+}
+.tab {
+  padding: 10px 18px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--gray-text);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tab-active {
+  color: var(--purple);
+  border-bottom-color: var(--purple);
+}
+
+
+/* ===== 10. TEACHERS — cards grid ===== */
+.teacher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.teacher-card {
+  background: var(--white);
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+.teacher-info h3 {
+  font-size: 17px;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.teacher-desig {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--purple);
+  background: rgba(164, 53, 240, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+.teacher-email {
+  color: var(--gray-text);
+  font-size: 13px;
+  margin-top: 6px;
+}
+.teacher-reason {
+  color: var(--red);
+  font-size: 13px;
+  margin-top: 6px;
+}
+.teacher-actions {
+  display: flex;
+  gap: 8px;
+}
+
+
+/* ===== 11. MODAL (Add/Edit/Remove popups) ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+.modal {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 26px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+.modal h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: var(--black);
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+/* Bada modal (attendance sheet jaisi tables ke liye) */
+.modal-wide {
+  max-width: 760px;
+}
+
+
+/* ===== 11b. ATTENDANCE SHEET (table) ===== */
+/* Chhoti screen par table side-scroll ho jaye */
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 14px;
+}
+.att-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.att-table th,
+.att-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--gray-border);
+  text-align: left;
+  white-space: nowrap;
+}
+.att-table th {
+  color: var(--gray-text);
+  font-size: 13px;
+  font-weight: 700;
+}
+/* Present/Absent dropdown — rang se turant pata chale */
+.status-select {
+  padding: 6px 10px;
+  border: 1px solid var(--gray-border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+/* Read-only status (students ke liye — dropdown nahi, sirf badge) */
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.is-present {
+  color: #0F766E;
+  background: rgba(16, 185, 129, 0.12);
+}
+.is-absent {
+  color: var(--red);
+  background: #FDECEF;
+}
+/* Attendance page ke status badges */
+.badge-published {
+  color: #0F766E;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.badge-draft {
+  color: var(--gray-text);
+  background: var(--gray-light);
+  border: 1px solid var(--gray-border);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* "Take Attendance" button — thoda alag dikhe */
+.btn-attendance {
+  border-color: var(--purple);
+  color: var(--purple);
+  font-weight: 700;
+}
+.btn-attendance:hover {
+  background: rgba(164, 53, 240, 0.08);
+}
+
+
+/* ===== 12. CLASSES — list cards ===== */
+.class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.class-card {
+  background: var(--white);
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.class-main h3 {
+  font-size: 17px;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+.class-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: var(--gray-text);
+  font-size: 14px;
+}
+.class-desc {
+  margin-top: 8px;
+  color: var(--black);
+  font-size: 14px;
+}
+.class-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+/* Join button — purple (Google Meet link) */
+.btn-join {
+  background: var(--purple);
+  color: var(--white);
+  border-color: var(--purple);
+  text-decoration: none;
+}
+.btn-join:hover {
+  background: var(--purple-dark);
+  color: var(--white);
+}
+
+
+/* Class khatam hone par (Sir + students dono ko) */
+.ended-note {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: var(--radius);
+  background: var(--gray-light);
+  border: 1px solid var(--gray-border);
+  color: var(--gray-text);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+/* Class abhi shuru nahi hui (student ko) */
+.muted-note {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  color: var(--gray-text);
+  font-size: 13px;
+  font-style: italic;
+  white-space: nowrap;
+}
+/* Disabled buttons (jaise Take Attendance jab class shuru na hui ho) */
+.btn-small:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* "In class" indicator — jab student abhi class mein maujood ho */
+.in-class {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: var(--radius);
+  background: rgba(16, 185, 129, 0.12);
+  color: #0F766E;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+/* Notice box (jaise Visitor ko "you are not enrolled" batana) */
+.notice {
+  background: rgba(164, 53, 240, 0.08);
+  border: 1px solid rgba(164, 53, 240, 0.3);
+  border-left: 4px solid var(--purple);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  color: var(--black);
+  font-size: 14px;
+}
+
+
+/* ===== 13. RESPONSIVE (mobile / tablet) ===== */
 @media (max-width: 768px) {
   .dashboard {
     flex-direction: column;

@@ -21,7 +21,7 @@ class User(AbstractUser):
         max_length=10,
         choices=Role.choices,
         default=Role.VISITOR,   # naya user default mein Visitor hoga
-        help_text='Is user ka role: Admin, Student, ya Visitor',
+        help_text='The role of this user: Admin, Student, or Visitor',
     )
 
     def __str__(self):
