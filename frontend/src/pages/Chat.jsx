@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import api from '../api'
 
-// Backend ka WebSocket address (api.js ke baseURL se banaya)
-const WS_URL = 'ws://127.0.0.1:8000/ws/chat/'
+// Local: fallback. Production (Vercel): VITE_WS_URL env var se (wss://.../ws/chat/)
+const WS_URL = import.meta.env.VITE_WS_URL || 'ws://127.0.0.1:8000/ws/chat/'
 
 function Chat() {
   const { user } = useOutletContext()

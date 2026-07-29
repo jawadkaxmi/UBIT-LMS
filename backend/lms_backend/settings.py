@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!cr84*@sv@1-0^t7h-ga684$rbv8tmhk1k(97v%y7xgmbt!s)c'
+# Local: default (dev key). Production (Render): SECRET_KEY env var se aayega.
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-!cr84*@sv@1-0^t7h-ga684$rbv8tmhk1k(97v%y7xgmbt!s)c',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Production mein Render pe DEBUG=False set karenge.
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -58,6 +66,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # static files serve karne ke liye (production)
     'corsheaders.middleware.CorsMiddleware',   # CORS — CommonMiddleware se pehle hona zaroori hai
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -90,22 +99,32 @@ WSGI_APPLICATION = 'lms_backend.wsgi.application'
 ASGI_APPLICATION = 'lms_backend.asgi.application'
 
 # Channel layer — messages ko connections ke beech pahunchane ka "postman".
-# Dev mein in-memory (koi Redis nahi). Production mein Redis lagega.
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-    },
-}
+# Local: in-memory. Production (Render): REDIS_URL set -> Redis.
+REDIS_URL = os.environ.get('REDIS_URL')
+if REDIS_URL:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {'hosts': [REDIS_URL]},
+        },
+    }
+else:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        },
+    }
 
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Local: DATABASE_URL set nahi -> SQLite. Production (Render): DATABASE_URL set -> PostgreSQL.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600,
+    )
 }
 
 
@@ -144,6 +163,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# collectstatic yahan files jama karega (production mein WhiteNoise serve karega)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+}
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -170,8 +195,19 @@ REST_FRAMEWORK = {
 # ============================================================
 #  CORS — frontend (React) ko backend se baat karne ki ijaazat
 # ============================================================
-# React dev server in addresses par chalta hai (Vite). Sirf inhe allow karenge.
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    'http://127.0.0.1:5173',
-]
+# Local: React dev server (5173). Production: Vercel domain env var se add hoga.
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    'CORS_ALLOWED_ORIGINS',
+    'http://localhost:5173,http://127.0.0.1:5173',
+).split(',')
+
+# Admin/forms https par kaam karein iske liye trusted origins (Render + Vercel)
+CSRF_TRUSTED_ORIGINS = [o for o in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if o]
+
+
+# ============================================================
+#  Production security (sirf jab DEBUG=False ho)
+# ============================================================
+if not DEBUG:
+    # Render https par proxy ke peeche hota hai — Django ko batao request secure hai
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
