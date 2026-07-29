@@ -25,6 +25,8 @@ urlpatterns = [
     path('api/', include('classes.urls')),
     # Teachers API routes (/api/teachers/)
     path('api/', include('teachers.urls')),
+    # Chat REST routes (history + delete) — live messages WebSocket se
+    path('api/', include('chat.urls')),
     # Attendance API routes (/api/attendance/records/...)
     path('api/attendance/', include('attendance.urls')),
     # Lectures API routes (/api/lectures/, /api/classes/<id>/lecture/)

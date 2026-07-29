@@ -14,7 +14,7 @@ const menusByRole = {
     { label: '📅 Attendance', path: '/attendance' },
     { label: '🎥 Lectures', path: '/lectures' },
     { label: '📢 Announcements' },
-    { label: '💬 Chat' },
+    { label: '💬 Chat', path: '/chat' },
     { label: '⚙️ Settings' },
   ],
   STUDENT: [
@@ -22,7 +22,7 @@ const menusByRole = {
     { label: '📚 Classes', path: '/classes' },
     { label: '📅 Attendance', path: '/attendance' },
     { label: '🎥 Lectures', path: '/lectures' },
-    { label: '💬 Chat' },
+    { label: '💬 Chat', path: '/chat' },
   ],
   VISITOR: [
     { label: '🏠 Home', path: '/dashboard' },

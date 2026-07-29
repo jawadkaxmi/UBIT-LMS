@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Daphne (ASGI server) — WebSockets ke liye. Sabse upar hona zaroori hai
+    # taaki runserver ka ASGI version chale.
+    'daphne',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'rest_framework',        # Django REST Framework — API banane ke liye
     'corsheaders',           # React (frontend) ko backend se baat karne dene ke liye
+    'channels',              # WebSockets (real-time chat) (Phase 5)
 
     # Hamari apni apps
     'accounts',              # users, roles (Admin/Student/Visitor), login
@@ -48,6 +53,7 @@ INSTALLED_APPS = [
     'teachers',              # teachers ki list (add/edit/soft-delete)
     'attendance',            # join/leave logs + attendance sheet (Phase 3)
     'lectures',              # recorded lectures (YouTube + chapters) (Phase 4)
+    'chat',                  # real-time discussion chat (Phase 5)
 ]
 
 MIDDLEWARE = [
@@ -79,6 +85,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'lms_backend.wsgi.application'
+
+# ASGI — WebSockets (chat) ke liye. Channels isi ko use karta hai.
+ASGI_APPLICATION = 'lms_backend.asgi.application'
+
+# Channel layer — messages ko connections ke beech pahunchane ka "postman".
+# Dev mein in-memory (koi Redis nahi). Production mein Redis lagega.
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database
