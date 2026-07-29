@@ -19,6 +19,7 @@ class AttendanceRecordSerializer(serializers.ModelSerializer):
     status_display = serializers.CharField(source='get_status_display', read_only=True)
 
     # Class ki details bhi (student ke apne attendance panel ke liye)
+    course_name = serializers.CharField(source='class_session.course_name', read_only=True)
     class_title = serializers.CharField(source='class_session.title', read_only=True)
     class_date = serializers.DateField(source='class_session.date', read_only=True)
     class_start_time = serializers.TimeField(source='class_session.start_time', read_only=True)
@@ -33,7 +34,8 @@ class AttendanceRecordSerializer(serializers.ModelSerializer):
             'status', 'status_display', 'join_count', 'total_minutes',
             'first_joined_at', 'last_joined_at',
             'was_present_at_attendance', 'manually_edited',
-            'class_title', 'class_date', 'class_start_time', 'class_attendance_taken_at',
+            'course_name', 'class_title', 'class_date', 'class_start_time',
+            'class_attendance_taken_at',
         )
         # Sirf `status` manually badla ja sakta hai — baaki system calculate karta hai
         read_only_fields = (

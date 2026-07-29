@@ -63,8 +63,10 @@ function Attendance() {
               <table className="att-table">
                 <thead>
                   <tr>
+                    <th>Course</th>
                     <th>Class</th>
                     <th>Date</th>
+                    <th>Time</th>
                     <th>Teacher</th>
                     <th>Present</th>
                     <th>Status</th>
@@ -72,10 +74,18 @@ function Attendance() {
                   </tr>
                 </thead>
                 <tbody>
-                  {rows.map((c) => (
+                  {[...rows]
+                    .sort(
+                      (a, b) =>
+                        (a.course_name || '').localeCompare(b.course_name || '') ||
+                        a.date.localeCompare(b.date)
+                    )
+                    .map((c) => (
                     <tr key={c.id}>
+                      <td>{c.course_name || '—'}</td>
                       <td>{c.title}</td>
                       <td>{c.date}</td>
+                      <td>{c.start_time?.slice(0, 5)}</td>
                       <td>{c.teacher_name || '—'}</td>
                       <td>
                         {c.attendance_taken_at
@@ -150,6 +160,7 @@ function Attendance() {
             <table className="att-table">
               <thead>
                 <tr>
+                  <th>Course</th>
                   <th>Class</th>
                   <th>Date</th>
                   <th>Time</th>
@@ -162,6 +173,7 @@ function Attendance() {
               <tbody>
                 {rows.map((r) => (
                   <tr key={r.id}>
+                    <td>{r.course_name || '—'}</td>
                     <td>{r.class_title}</td>
                     <td>{r.class_date}</td>
                     <td>{r.class_start_time?.slice(0, 5)}</td>
@@ -183,6 +195,7 @@ function Attendance() {
                           setSheet({
                             cls: {
                               id: r.class_session,
+                              course_name: r.course_name,
                               title: r.class_title,
                               attendance_taken_at: r.class_attendance_taken_at,
                               attendance_published: true,

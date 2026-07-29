@@ -439,6 +439,36 @@ a {
   max-width: 760px;
 }
 
+/* ===== Chapter rows (recording form) ===== */
+.chapter-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.chapter-title {
+  flex: 1;
+}
+.chapter-time {
+  width: 90px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.chapter-remove {
+  background: none;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  color: var(--red);
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+.chapter-remove:hover {
+  background: #FDECEF;
+}
+
 
 /* ===== 11b. ATTENDANCE SHEET (table) ===== */
 /* Chhoti screen par table side-scroll ho jaye */
@@ -518,6 +548,81 @@ a {
 }
 
 
+/* ===== 11c. LECTURES — video player + chapters ===== */
+.lecture-heading {
+  font-size: 22px;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+/* Watch view mein video ke upar class details */
+.lecture-submeta {
+  margin-bottom: 14px;
+}
+/* Responsive 16:9 video wrapper (YouTube embed) */
+.video-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.chapters-card {
+  max-width: 900px;
+  margin-top: 18px;
+}
+.chapters-card h3 {
+  margin-bottom: 10px;
+  color: var(--black);
+}
+.chapter-list {
+  list-style: none;
+}
+.chapter-list li {
+  margin-bottom: 4px;
+}
+/* Ek chapter — click par video wahan jump */
+.chapter-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  color: var(--black);
+  transition: background 0.15s ease;
+}
+.chapter-item:hover {
+  background: var(--gray-light);
+}
+.chapter-active {
+  background: rgba(164, 53, 240, 0.1);
+  color: var(--purple);
+  font-weight: 700;
+}
+.chapter-stamp {
+  color: var(--purple);
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+
 /* ===== 12. CLASSES — list cards ===== */
 .class-list {
   display: flex;
@@ -539,6 +644,16 @@ a {
   font-size: 17px;
   color: var(--black);
   margin-bottom: 8px;
+}
+/* Course ka naam (class title ke upar chhota purple label) */
+.course-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 4px;
 }
 .class-meta {
   display: flex;

@@ -14,15 +14,18 @@ class ClassSessionSerializer(serializers.ModelSerializer):
     # Attendance ka khulasa (Attendance page ki list ke liye)
     attendance_present_count = serializers.SerializerMethodField()
     attendance_total_count = serializers.SerializerMethodField()
+    # Is class ki recording (lecture) hai ya nahi
+    has_lecture = serializers.SerializerMethodField()
 
     class Meta:
         model = ClassSession
         fields = (
-            'id', 'title', 'description', 'date', 'start_time',
+            'id', 'course_name', 'title', 'description', 'date', 'start_time',
             'meet_link', 'teacher', 'teacher_name',
             'started_at', 'ended_at',
             'attendance_taken_at', 'attendance_published', 'is_joined',
             'attendance_present_count', 'attendance_total_count',
+            'has_lecture',
             'created_at',
         )
         # Ye fields user set nahi kar sakta — system/actions set karte hain
@@ -49,3 +52,7 @@ class ClassSessionSerializer(serializers.ModelSerializer):
     def get_attendance_total_count(self, obj):
         # Kul kitne students ki attendance sheet mein rows hain
         return obj.attendance_records.count()
+
+    def get_has_lecture(self, obj):
+        # Is class ki recording maujood hai?
+        return hasattr(obj, 'lecture')

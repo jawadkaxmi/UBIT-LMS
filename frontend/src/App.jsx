@@ -5,6 +5,7 @@ import DashboardHome from './pages/DashboardHome'
 import Teachers from './pages/Teachers'
 import Classes from './pages/Classes'
 import Attendance from './pages/Attendance'
+import Lectures from './pages/Lectures'
 
 function App() {
   // Agar token hai to user "logged in" hai
@@ -21,6 +22,7 @@ function App() {
         <Route path="/teachers" element={<Teachers />} />
         <Route path="/classes" element={<Classes />} />
         <Route path="/attendance" element={<Attendance />} />
+        <Route path="/lectures" element={<Lectures />} />
       </Route>
 
       {/* Koi bhi aur URL: logged in ho to dashboard, warna login */}

@@ -7,9 +7,15 @@ class ClassSession(models.Model):
     Har class ka topic, date, time aur Google Meet link hota hai.
     """
 
+    course_name = models.CharField(
+        max_length=200,
+        blank=True,
+        default='',
+        help_text='The course this class belongs to, e.g. "OOP" / "Data Structures"',
+    )
     title = models.CharField(
         max_length=200,
-        help_text='The class topic, e.g. "OOP - Inheritance"',
+        help_text='The class (session) topic, e.g. "OOP - Inheritance"',
     )
     description = models.TextField(
         blank=True,

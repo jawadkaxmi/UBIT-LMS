@@ -80,7 +80,10 @@ function AttendanceSheetModal({
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal modal-wide" onClick={(e) => e.stopPropagation()}>
-        <h2>Attendance — {cls.title}</h2>
+        <h2>
+          Attendance — {cls.course_name ? `${cls.course_name}: ` : ''}
+          {cls.title}
+        </h2>
         <p className="muted">
           {cls.attendance_taken_at
             ? `Taken: ${new Date(cls.attendance_taken_at).toLocaleString()}`

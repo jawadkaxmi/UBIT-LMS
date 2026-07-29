@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'classes',               # classes announce karna (Phase 2)
     'teachers',              # teachers ki list (add/edit/soft-delete)
     'attendance',            # join/leave logs + attendance sheet (Phase 3)
+    'lectures',              # recorded lectures (YouTube + chapters) (Phase 4)
 ]
 
 MIDDLEWARE = [

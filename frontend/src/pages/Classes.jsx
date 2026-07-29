@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import api from '../api'
 import AttendanceSheetModal from '../components/AttendanceSheetModal'
+import LectureFormModal from '../components/LectureFormModal'
 
 const emptyForm = {
+  course_name: '',
   title: '',
   description: '',
   date: '',
@@ -25,6 +27,8 @@ function Classes() {
 
   // Attendance sheet modal (sirf Admin) — { cls, autoTake } ya null
   const [sheet, setSheet] = useState(null)
+  // Recording (lecture) form modal (sirf Admin) — class ya null
+  const [lectureClass, setLectureClass] = useState(null)
 
   // Announce/Edit modal state
   const [showForm, setShowForm] = useState(false)
@@ -62,6 +66,7 @@ function Classes() {
   const openEdit = (c) => {
     setEditing(c)
     setForm({
+      course_name: c.course_name,
       title: c.title,
       description: c.description,
       date: c.date,
@@ -195,6 +200,7 @@ function Classes() {
           {shown.map((c) => (
             <div className="class-card" key={c.id}>
               <div className="class-main">
+                {c.course_name && <span className="course-label">{c.course_name}</span>}
                 <h3>{c.title}</h3>
                 <div className="class-meta">
                   <span>📅 {c.date}</span>
@@ -246,6 +252,11 @@ function Classes() {
                       title={!c.started_at ? 'Start the class first' : ''}
                     >
                       {c.attendance_taken_at ? 'Attendance' : 'Take Attendance'}
+                    </button>
+
+                    {/* Recording add/edit */}
+                    <button className="btn-small" onClick={() => setLectureClass(c)}>
+                      {c.has_lecture ? 'Edit Recording' : 'Add Recording'}
                     </button>
 
                     <button className="btn-small" onClick={() => openEdit(c)}>
@@ -309,7 +320,16 @@ function Classes() {
             <form onSubmit={saveForm}>
               {formError && <div className="error-box">{formError}</div>}
 
-              <label className="field-label">Title</label>
+              <label className="field-label">Course Name</label>
+              <input
+                className="field-input"
+                value={form.course_name}
+                onChange={(e) => setForm({ ...form, course_name: e.target.value })}
+                placeholder="e.g. OOP / Data Structures"
+                required
+              />
+
+              <label className="field-label">Class title</label>
               <input
                 className="field-input"
                 value={form.title}
@@ -388,6 +408,15 @@ function Classes() {
           autoTake={sheet.autoTake}
           onClose={() => setSheet(null)}
           onChanged={loadClasses}
+        />
+      )}
+
+      {/* ===== Recording (lecture) add/edit modal — sirf Admin ===== */}
+      {lectureClass && (
+        <LectureFormModal
+          classSession={lectureClass}
+          onClose={() => setLectureClass(null)}
+          onSaved={loadClasses}
         />
       )}
     </>

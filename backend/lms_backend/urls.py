@@ -27,6 +27,8 @@ urlpatterns = [
     path('api/', include('teachers.urls')),
     # Attendance API routes (/api/attendance/records/...)
     path('api/attendance/', include('attendance.urls')),
+    # Lectures API routes (/api/lectures/, /api/classes/<id>/lecture/)
+    path('api/', include('lectures.urls')),
     # DRF browsable API ke login/logout (browser mein API test karne ke liye)
     path('api-auth/', include('rest_framework.urls')),
 ]
