@@ -258,6 +258,209 @@ a {
 }
 
 
+/* ===== 5b. DASHBOARD HOME (tiles + charts) ===== */
+/* Stat tiles grid */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.stat-tile {
+  --accent: var(--purple);
+  background: var(--white);
+  border: 1px solid var(--gray-border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+.stat-value {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+}
+.stat-label {
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-text);
+}
+
+/* Rows of cards */
+.dash-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: stretch;
+}
+.dash-card {
+  background: var(--white);
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+.dash-grow {
+  flex: 1;
+  min-width: 280px;
+}
+.dash-title {
+  font-size: 15px;
+  color: var(--black);
+  margin-bottom: 14px;
+}
+
+/* Bar chart (admin — present % per class) */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 170px;
+}
+.bar-col {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bar-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.bar-track {
+  flex: 1;
+  width: 100%;
+  max-width: 44px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--gray-light);
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+}
+.bar-fill {
+  width: 100%;
+  min-height: 3px;
+  background: linear-gradient(var(--purple), var(--purple-dark));
+  border-radius: 6px 6px 0 0;
+  transition: height 0.4s ease;
+}
+.bar-label {
+  margin-top: 6px;
+  max-width: 100%;
+  font-size: 12px;
+  color: var(--gray-text);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Present/Absent dots (student) */
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 4px;
+}
+.dot-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+}
+.dot-present {
+  background: #10B981;
+}
+.dot-absent {
+  background: var(--red);
+}
+.dot-label {
+  font-size: 11px;
+  color: var(--gray-text);
+}
+
+/* Percentage ring (conic-gradient donut) */
+.ring-card {
+  background: var(--white);
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  min-width: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.ring {
+  --pct: 0;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(var(--purple) calc(var(--pct) * 1%), var(--gray-border) 0);
+  display: grid;
+  place-items: center;
+}
+.ring::before {
+  content: '';
+  position: absolute;
+  inset: 13px;
+  background: var(--white);
+  border-radius: 50%;
+}
+.ring-value {
+  position: relative;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--black);
+}
+.ring-label {
+  font-size: 12px;
+  color: var(--gray-text);
+  text-align: center;
+}
+
+/* Next class + announcements mini-list */
+.next-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--black);
+  margin: 4px 0 8px;
+}
+.dash-ann {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dash-ann li {
+  font-size: 14px;
+  color: var(--black);
+  padding: 9px 11px;
+  background: var(--gray-light);
+  border-radius: 6px;
+}
+
+
 /* ===== 6. HELPERS ===== */
 .center-screen {
   min-height: 100vh;

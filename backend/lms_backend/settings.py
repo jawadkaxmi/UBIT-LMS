@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'lectures',              # recorded lectures (YouTube + chapters) (Phase 4)
     'chat',                  # real-time discussion chat (Phase 5)
     'announcements',         # Sir ke announcements (sab students ke liye)
+    'dashboard',             # role-based dashboard stats (koi model nahi, sirf API)
 ]
 
 MIDDLEWARE = [

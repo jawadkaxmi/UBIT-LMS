@@ -33,6 +33,8 @@ urlpatterns = [
     path('api/', include('lectures.urls')),
     # Announcements API routes (/api/announcements/)
     path('api/', include('announcements.urls')),
+    # Dashboard stats (/api/dashboard/)
+    path('api/', include('dashboard.urls')),
     # DRF browsable API ke login/logout (browser mein API test karne ke liye)
     path('api-auth/', include('rest_framework.urls')),
 ]
