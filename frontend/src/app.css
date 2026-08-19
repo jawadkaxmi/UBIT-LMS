@@ -803,6 +803,75 @@ a {
 .chat-input .field-input { flex: 1; }
 
 
+/* ===== 12c. ANNOUNCEMENTS (Sir ke notices) ===== */
+.ann-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 760px;
+}
+.ann-card {
+  background: var(--white);
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+/* Pinned announcement — purple left border se alag dikhe */
+.ann-pinned {
+  border-left: 4px solid var(--purple);
+  background: rgba(164, 53, 240, 0.04);
+}
+.ann-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.ann-head h3 {
+  font-size: 17px;
+  color: var(--black);
+}
+.ann-pin {
+  margin-right: 6px;
+}
+.ann-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+/* Message text — line breaks waise ke waise rahein */
+.ann-body {
+  margin: 10px 0;
+  color: var(--black);
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.ann-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: var(--gray-text);
+  font-size: 13px;
+}
+/* Modal mein "Pin to top" checkbox */
+.ann-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ann-check input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+
 /* ===== 13. RESPONSIVE (mobile / tablet) ===== */
 @media (max-width: 768px) {
   .dashboard {

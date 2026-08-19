@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'attendance',            # join/leave logs + attendance sheet (Phase 3)
     'lectures',              # recorded lectures (YouTube + chapters) (Phase 4)
     'chat',                  # real-time discussion chat (Phase 5)
+    'announcements',         # Sir ke announcements (sab students ke liye)
 ]
 
 MIDDLEWARE = [

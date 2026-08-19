@@ -6,6 +6,7 @@ import Teachers from './pages/Teachers'
 import Classes from './pages/Classes'
 import Attendance from './pages/Attendance'
 import Lectures from './pages/Lectures'
+import Announcements from './pages/Announcements'
 import Chat from './pages/Chat'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/classes" element={<Classes />} />
         <Route path="/attendance" element={<Attendance />} />
         <Route path="/lectures" element={<Lectures />} />
+        <Route path="/announcements" element={<Announcements />} />
         <Route path="/chat" element={<Chat />} />
       </Route>
 
