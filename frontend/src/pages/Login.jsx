@@ -40,7 +40,7 @@ function Login() {
     <div className="login-page">
       <form className="login-card" onSubmit={handleSubmit}>
         <div className="login-logo">🎓 LMS</div>
-        <p className="login-subtitle">CS Department Portal</p>
+        <p className="login-subtitle">UBIT - Portal</p>
 
         {/* Error message (agar login fail ho) */}
         {error && <div className="error-box">{error}</div>}
