@@ -1,91 +1,83 @@
-# LMS — Learning Management System
+# UBIT Learning Management System (LMS)
 
-A Learning Management System (LMS) web app built for a university CS department
-(UBIT, University of Karachi). It is a Final Year Project as well as a system
-intended for real use.
+A full-stack Learning Management System developed collaboratively as a university project for the Department of Computer Science (UBIT), University of Karachi.
 
-A teacher ("Sir") can run their class online: announce classes, hold live
-sessions on Google Meet, upload recorded lectures with chapters, track
-attendance automatically, and discuss with students in a real-time chat — a
-self-built mini-Coursera + Google Classroom.
+The platform helps teachers and students manage online classes, attendance, recorded lectures, and real-time communication.
 
 ## Features
 
-- **Role-based access** — Admin (teacher), Student, and Visitor, secured with JWT login.
-- **Classes** — announce classes (course, topic, date, time, Google Meet link, teacher); start/end a class.
-- **Teachers** — manage a teacher list with soft-delete (removal reason) and reactivation.
-- **Attendance** — automatic join/leave tracking, "Take Attendance" snapshot, manual edit, and publish; students get their own attendance panel.
-- **Recorded lectures** — YouTube-based recordings with clickable chapter timestamps (Coursera-style).
-- **Real-time discussion chat** — WebSocket-based group chat between the teacher and students, with admin moderation.
+- **Role-based authentication** for Admin, Student, and Visitor accounts
+- **Class management** with scheduling and Google Meet integration
+- **Teacher management** with removal and reactivation
+- **Attendance tracking** with join/leave records, manual editing, and publishing
+- **Recorded lectures** with YouTube videos and clickable chapter timestamps
+- **Real-time group chat** using WebSockets, with admin moderation
 
-## Tech Stack
+## Technology Stack
 
-| Layer      | Technology                              |
-|------------|-----------------------------------------|
-| Frontend   | React (Vite) + plain CSS (`app.css`)    |
-| Backend    | Django + Django REST Framework          |
-| Real-time  | Django Channels (WebSockets)            |
-| Database   | SQLite (dev) → PostgreSQL (production)  |
-| Auth       | JWT (role-based)                        |
-| Live class | Google Meet + in-app Join/Leave tracking |
-
-## Roles
-
-- **Admin (Sir)** — full control: create users, manage classes/teachers, take attendance, moderate chat.
-- **Student** — logs in with a unique id/password issued by the teacher.
-- **Visitor** — a signed-in user who is not enrolled; sees a limited view.
+| Layer | Technologies |
+|---|---|
+| Frontend | React, Vite, CSS |
+| Backend | Python, Django, Django REST Framework |
+| Real-time communication | Django Channels, WebSockets |
+| Database | SQLite, PostgreSQL |
+| Authentication | JWT |
+| Live classes | Google Meet integration |
 
 ## Project Structure
 
-```
-LMS/
-├── backend/      # Django + DRF + Channels (API, WebSockets)
-└── frontend/     # React (UI)
-```
+- `backend/` — Django backend, REST APIs, and WebSocket functionality
+- `frontend/` — React application
 
-## Getting Started (local development)
-
-Requirements: Python 3.12+ and Node.js 18+.
+## Run Locally
 
 ### Backend
 
 ```bash
 cd backend
 python -m venv venv
-venv\Scripts\activate            # Windows (use: source venv/bin/activate on macOS/Linux)
+```
+
+Activate the virtual environment:
+
+**Windows**
+```bash
+venv\Scripts\activate
+```
+
+**macOS / Linux**
+```bash
+source venv/bin/activate
+```
+
+Install dependencies and start the backend:
+
+```bash
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py createsuperuser  # create the first admin
-python manage.py runserver        # runs at http://127.0.0.1:8000
+python manage.py createsuperuser
+python manage.py runserver
 ```
 
 ### Frontend
 
+Open another terminal:
+
 ```bash
 cd frontend
 npm install
-npm run dev                       # runs at http://localhost:5173
+npm run dev
 ```
 
-Open http://localhost:5173 and log in with the admin account you created.
+Open `http://localhost:5173` in your browser.
 
-## Configuration
+## Developers
 
-The backend reads configuration from environment variables (with local-friendly
-defaults, so it runs on SQLite out of the box):
+Collaboratively developed by:
 
-| Variable | Purpose |
-|----------|---------|
-| `SECRET_KEY` | Django secret key (set in production) |
-| `DEBUG` | `True` locally, `False` in production |
-| `ALLOWED_HOSTS` | Comma-separated allowed hosts |
-| `DATABASE_URL` | If set, uses PostgreSQL; otherwise SQLite |
-| `REDIS_URL` | If set, uses Redis as the channel layer; otherwise in-memory |
-| `CORS_ALLOWED_ORIGINS` | Comma-separated frontend origins |
+- [jawadkaxmi](https://github.com/jawadkaxmi)
+- [umer29github](https://github.com/umer29github)
 
-The frontend reads `VITE_API_URL` and `VITE_WS_URL` (falling back to
-`localhost` for development).
+## Academic Project
 
-## License
-
-Final Year Project — Department of Computer Science, UBIT, University of Karachi.
+Department of Computer Science (UBIT), University of Karachi.
