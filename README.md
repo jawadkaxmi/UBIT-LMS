@@ -2,16 +2,16 @@
 
 A full-stack Learning Management System developed collaboratively as a university project for the Department of Computer Science (UBIT), University of Karachi.
 
-The platform helps teachers and students manage online classes, attendance, recorded lectures, and real-time communication.
+The platform helps teachers and students manage online classes, attendance, recorded lectures, and real-time communication through a centralized web application.
 
 ## Features
 
-- **Role-based authentication** for Admin, Student, and Visitor accounts
-- **Class management** with scheduling and Google Meet integration
-- **Teacher management** with removal and reactivation
-- **Attendance tracking** with join/leave records, manual editing, and publishing
-- **Recorded lectures** with YouTube videos and clickable chapter timestamps
-- **Real-time group chat** using WebSockets, with admin moderation
+- **Role-Based Authentication:** Separate access for Admin, Student, and Visitor accounts.
+- **Class Management:** Create and schedule classes with Google Meet integration.
+- **Teacher Management:** Manage teacher accounts, including removal and reactivation.
+- **Attendance Tracking:** Track student join/leave records, manually edit attendance, and publish attendance records.
+- **Recorded Lectures:** Access YouTube-based recorded lectures with clickable chapter timestamps.
+- **Real-Time Group Chat:** WebSocket-based communication with admin moderation.
 
 ## Technology Stack
 
@@ -19,21 +19,38 @@ The platform helps teachers and students manage online classes, attendance, reco
 |---|---|
 | Frontend | React, Vite, CSS |
 | Backend | Python, Django, Django REST Framework |
-| Real-time communication | Django Channels, WebSockets |
+| Real-Time Communication | Django Channels, WebSockets |
 | Database | SQLite, PostgreSQL |
 | Authentication | JWT |
-| Live classes | Google Meet integration |
+| Online Classes | Google Meet Integration |
 
 ## Project Structure
 
-- `backend/` — Django backend, REST APIs, and WebSocket functionality
-- `frontend/` — React application
+```text
+UBIT-LMS/
+│
+├── backend/       # Django backend, REST APIs and WebSockets
+├── frontend/      # React frontend application
+├── README.md
+└── .gitignore
+```
 
 ## Run Locally
 
-### Backend
+### Prerequisites
 
-Open a terminal in the project directory:
+- Python
+- Node.js and npm
+- Git
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/jawadkaxmi/UBIT-LMS.git
+cd UBIT-LMS
+```
+
+### 2. Set Up the Backend
 
 ```bash
 cd backend
@@ -42,17 +59,25 @@ python -m venv venv
 
 Activate the virtual environment:
 
-**Windows**
+**Windows (Command Prompt):**
+
 ```bash
 venv\Scripts\activate
 ```
 
-**macOS / Linux**
+**Windows (PowerShell):**
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+**macOS / Linux:**
+
 ```bash
 source venv/bin/activate
 ```
 
-Install dependencies and start the backend:
+Install dependencies and initialize the database:
 
 ```bash
 pip install -r requirements.txt
@@ -61,9 +86,13 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-### Frontend
+The backend will be available at:
 
-Open another terminal:
+`http://127.0.0.1:8000`
+
+### 3. Set Up the Frontend
+
+Open another terminal in the project directory:
 
 ```bash
 cd frontend
@@ -71,7 +100,10 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173` in your browser.
+The frontend will be available at:
+
+`http://localhost:5173`
+
 ## Developers
 
 Collaboratively developed by:
@@ -81,4 +113,9 @@ Collaboratively developed by:
 
 ## Academic Project
 
-Department of Computer Science (UBIT), University of Karachi.
+Department of Computer Science (UBIT)  
+University of Karachi, Pakistan.
+
+---
+
+**GitHub Repository:** [UBIT Learning Management System](https://github.com/jawadkaxmi/UBIT-LMS)
