@@ -33,6 +33,8 @@ The platform helps teachers and students manage online classes, attendance, reco
 
 ### Backend
 
+Open a terminal in the project directory:
+
 ```bash
 cd backend
 python -m venv venv
@@ -70,7 +72,6 @@ npm run dev
 ```
 
 Open `http://localhost:5173` in your browser.
-
 ## Developers
 
 Collaboratively developed by:
