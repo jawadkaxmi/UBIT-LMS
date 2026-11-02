@@ -119,3 +119,18 @@ University of Karachi, Pakistan.
 ---
 
 **GitHub Repository:** [UBIT Learning Management System](https://github.com/jawadkaxmi/UBIT-LMS)
+
+
+## Screenshots
+
+<h3>Dashboard</h3>
+<img src="dashboard.jpeg" width="900">
+
+<h3>Attendance</h3>
+<img src="attendance.jpeg" width="900">
+
+<h3>Classes</h3>
+<img src="classes.jpeg" width="900">
+
+<h3>Lectures</h3>
+<img src="lectures.jpeg" width="900">
